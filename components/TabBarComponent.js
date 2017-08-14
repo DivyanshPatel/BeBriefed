@@ -6,14 +6,15 @@ import {
 } from 'react-native';
 
 import Tabs from 'react-native-tabs';
+import TabBarItems from './TabBarItems';
 
 class TabBarComponent extends Component{
 	render(){
 		return(
-			<Tabs style={styles.tabContainer}>
-			<Text>Web</Text>
-			<Text>DB</Text>
-			<Text>Mail</Text>
+			<Tabs iconStyle={{height: 72}} style={styles.tabContainer} onSelect={comp => {this.props.onTabChange(comp.props.name)}} selected={this.props.selectedService} >
+			<TabBarItems name='web' lable='Web' icon='server'/  >
+			<TabBarItems name='db' lable='DB Server' icon='database'/  >
+			<TabBarItems name='mail' lable='Mail Server' icon='envelope-o'/  >
 			</Tabs>
 			);
 	}

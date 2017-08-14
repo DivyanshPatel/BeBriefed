@@ -10,13 +10,22 @@ import {
 import StatusScreen from './StatusScreen'
 import TabBarComponent from './TabBarComponent'
 
+import LinearGradient from 'react-native-linear-gradient'
+
 class MainContainer extends Component {
+  _renderTab(selected, services) {
+    const thisService = services.find(s => s.key === selected)
+    return (
+      <StatusScreen isUp = {thisService.isUp} lastUpTime = {thisService.lastUpTime} />
+      )
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-     <StatusScreen isUp={this.props.isUp} lastUpTime={this.props.lastUpTime}/>
-     <TabBarComponent />
-     </View>
+      <LinearGradient colors={['#ffffff','#4a787a']} style={styles.container}>
+     {this._renderTab(this.props.selectedService,this.props.services)}
+     <TabBarComponent onTabChange={this.props.onServiceChange} selectedService={this.props.selectedService}/>
+     </LinearGradient>
     );
   }
 }
